@@ -52,6 +52,8 @@ function celebrate() {
 function redirectAfterConfirm(redirectUrl: string, paymentId: string, slugValue: string) {
   try {
     const url = new URL(redirectUrl);
+    // Only allow HTTPS redirect URLs to prevent open redirect vulnerabilities.
+    if (url.protocol !== "https:") return;
     url.searchParams.set("status", "success");
     url.searchParams.set("payment_id", paymentId);
     url.searchParams.set("slug", slugValue);

@@ -39,6 +39,7 @@ export function OtpInput({
       {digits.map((digit, i) => (
         <input
           key={i}
+          type="text"
           ref={(el) => {
             inputs.current[i] = el;
           }}

@@ -34,8 +34,16 @@ jobs:
       - name: Test
         run: pnpm test
 
-      # Last: the slowest step, and the one the earlier checks usually predict.
       - name: Build
         env:
           NEXT_PUBLIC_OCTO_API_URL: https://example.invalid
         run: pnpm build
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: End-to-end tests
+        env:
+          NEXT_PUBLIC_OCTO_API_URL: https://example.invalid
+        run: pnpm test:e2e
+
